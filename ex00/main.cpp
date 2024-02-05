@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 11:00:35 by mmarcott          #+#    #+#             */
-/*   Updated: 2024/02/05 12:51:40 by mmarcott         ###   ########.fr       */
+/*   Updated: 2024/02/05 12:52:10 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,5 @@ int	main(int argc, char **argv) {
 		return (1);
 	Data data(argv[1]);
 	printResult(data);
-	printReault(data);
 	return (0);
 }
