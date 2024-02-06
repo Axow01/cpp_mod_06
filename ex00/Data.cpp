@@ -12,107 +12,46 @@
 
 #include "Data.hpp"
 
-Data::Data(const std::string data): _data(data) {}
+bool	isDouble(const std::string data) {
+	bool	foundPoint = false;
 
-Data::Data(const Data &copy): _data(copy._data) {
+	for (int i = 0; data[i]; i++) {
+		if (data[i] == '.')
+			foundPoint = true;
+		if (!isnumber(data[i]) && !(i > 0 && data[i] == '.'))
+			return (false);
+	}
+	if (foundPoint)
+		return (true);
+	return (false);
+}
+
+template <typename T>
+Data<T>::Data(const std::string data, T conv): _data(data), _conv(conv) {}
+
+template <typename T>
+Data<T>::Data(const Data &copy): _data(copy._data), _conv(copy._conv) {
 	*this = copy;
 }
 
-Data::~Data(void) {}
+template <typename T>
+Data<T>::~Data(void) {}
 
-Data	&Data::operator=(const Data &rhs) {
+template <typename T>
+Data<T>	&Data<T>::operator=(const Data &rhs) {
 	if (this != &rhs) {
 		_data = rhs._data;
+		_conv = rhs._conv;
 	}
 	return (*this);
 }
 
-char	Data::toChar(void) const {
-	if (_data.length() == 1)
-		return (_data[0]);
-	return ((char)toInt());
-}
-
-float	Data::toFloat(void) const {
-	return (std::stof(_data));
-}
-
-double	Data::toDouble(void) const {
-	return (std::stod(_data));
-}
-
-int	Data::toInt(void) const {
-	return (std::stoi(_data));
-}
-
-std::string	Data::getData(void) const {
+template <typename T>
+std::string	Data<T>::getData(void) const {
 	return (_data);
 }
 
-void	Data::printChar(void) const {
-	std::cout << "char: ";
-	if (_data == "nanf" || _data == "nan" || _data == "+inf" || _data == "-inf" || _data == "+inff" || _data == "-inff")
-		std::cout << "impossible" << std::endl;
-	else {
-		try {
-			if (!isprint(toInt()))
-				throw std::invalid_argument("can't be printed");
-			std::cout << toChar() << std::endl;
-		} catch (std::exception &e) {
-			std::cout << "impossible" << std::endl;
-		}
-	}
-}
-
-void	Data::printInt(void) const {
-	std::cout << "int: ";
-	if (_data == "nanf" || _data == "nan" || _data == "+inf" || _data == "-inf" || _data == "+inff" || _data == "-inff")
-		std::cout << "impossible" << std::endl;
-	else {
-		try {
-			std::cout << toInt() << std::endl;
-		} catch (std::exception &e) {
-			std::cout << "impossible" << std::endl;
-		}
-	}
-}
-
-void	Data::printFloat(void) const {
-	std::cout << "float: ";
-	if (_data == "nanf" || _data == "nan")
-		std::cout << "nanf" << std::endl;
-	else if (_data == "+inff" || _data == "+inf")
-		std::cout << "+inff" << std::endl;
-	else if (_data == "-inff" || _data == "-inf")
-		std::cout << "-inff" << std::endl;
-	else {
-		try {
-			std::cout << toFloat();
-			if ((float)toInt() == toFloat())
-				std::cout << ".0";
-			std::cout << "f" << std::endl;
-		} catch (std::exception &e) {
-			std::cout << "impossible" << std::endl;
-		}
-	}
-}
-
-void	Data::printDouble(void) const {
-	std::cout << "double: ";
-	if (_data == "nanf" || _data == "nan")
-		std::cout << "nan" << std::endl;
-	else if (_data == "+inff" || _data == "+inf")
-		std::cout << "+inf" << std::endl;
-	else if (_data == "-inff" || _data == "-inf")
-		std::cout << "-inf" << std::endl;
-	else {
-		try {
-			std::cout << toDouble();
-			if (toDouble() == (double)toInt())
-				std::cout << ".0";
-			std::cout << std::endl;
-		} catch (std::exception &e) {
-			std::cout << "impossible" << std::endl;
-		}
-	}
+template <typename T>
+T	Data<T>::getConv(void) const {
+	return (_conv);
 }
