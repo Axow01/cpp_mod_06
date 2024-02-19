@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 11:35:14 by mmarcott          #+#    #+#             */
-/*   Updated: 2024/02/06 15:15:39 by mmarcott         ###   ########.fr       */
+/*   Updated: 2024/02/19 14:48:27 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define HPP_DATA
 
 # include <iostream>
+# include <iomanip>
+# include <limits>
 # include <string>
 # include <cmath>
 

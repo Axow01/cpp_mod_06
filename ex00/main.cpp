@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 11:00:35 by mmarcott          #+#    #+#             */
-/*   Updated: 2024/02/06 16:09:29 by mmarcott         ###   ########.fr       */
+/*   Updated: 2024/02/19 15:15:37 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,23 +38,24 @@ static void	printThings(T conv){
 	float	floatingP = (float)conv;
 	double	doubleN = (double)conv;
 
-	if (isprint(character))
+	if (isprint(character) && (double)conv <= std::numeric_limits<char>::max() && (double)conv >= std::numeric_limits<char>::min())
 		std::cout << "char: " << character << std::endl;
 	else
 		std::cout << "char: Non displayable" << std::endl;
-	std::cout << "int: " << integer << std::endl;
-	std::cout << "float: " << floatingP;
-	if (floatingP == (float)integer)
-		std::cout << ".0";
-	std::cout << "f" << std::endl;
-	std::cout << "double: " << doubleN;
-	if (doubleN == (double)integer)
-		std::cout << ".0";
-	std::cout << std::endl;
+	if ((double)conv > std::numeric_limits<int>::max() || (double)conv < std::numeric_limits<int>::min())
+		std::cout << "int: impossible" << std::endl;
+	else
+		std::cout << "int: " << integer << std::endl;
+	std::cout.setf(std::ios::fixed, std::ios::floatfield);
+	if ((double)conv <= std::numeric_limits<float>::max() && (double)conv >= std::numeric_limits<float>::min())
+		std::cout << "float: " << floatingP << "f" << std::endl;
+	else
+		std::cout << "float: impossible" << std::endl;
+	std::cout << "double: " << doubleN << std::endl;
 }
 
 static int	getType(std::string data) {
-	if (data.length() == 1 && isalpha(data[0]))
+	if (data.length() == 1 && isprint(data[0]))
 		return (0);
 	else if (data.back() == 'f' && isnumber(data[0]))
 		return (1);
