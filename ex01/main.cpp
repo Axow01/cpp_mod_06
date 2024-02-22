@@ -31,5 +31,9 @@ int	main(void) {
 	std::cout << "Serialized Data raw: " << raw << std::endl;
 	dData = deserialize(raw);
 	std::cout << "Deserialized data int: " << dData->getNb() << " string: " << dData->getString() << std::endl;
+	if (dData == &testData)
+		std::cout << "The dData and testData pointers are the same!" << std::endl;
+	else
+		std::cout << "The dData pointer is not the same as testData pointer, this is an error!" << std::endl;
 	return (0);
 }
