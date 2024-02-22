@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 11:00:35 by mmarcott          #+#    #+#             */
-/*   Updated: 2024/02/19 15:15:37 by mmarcott         ###   ########.fr       */
+/*   Updated: 2024/02/22 13:33:24 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ static void	printThings(T conv){
 	else
 		std::cout << "int: " << integer << std::endl;
 	std::cout.setf(std::ios::fixed, std::ios::floatfield);
+	std::cout.precision(1);
 	if ((double)conv <= std::numeric_limits<float>::max() && (double)conv >= std::numeric_limits<float>::min())
 		std::cout << "float: " << floatingP << "f" << std::endl;
 	else
