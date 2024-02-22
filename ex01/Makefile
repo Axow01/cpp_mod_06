@@ -16,7 +16,7 @@ C_YELLOW = \\x1b[33m
 
 NAME = serialization
 
-SRC = 
+SRC = main.cpp Data.cpp
 
 OBJS = $(patsubst %.cpp, bin/%.o, $(SRC))
 
