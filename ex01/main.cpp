@@ -14,11 +14,11 @@
 #include <cstdint>
 
 static uintptr_t	serialize(Data *ptr) {
-	return ((uintptr_t)ptr);
+	return (reinterpret_cast<uintptr_t>(ptr));
 }
 
 static Data	*deserialize(uintptr_t raw) {
-	return ((Data *)raw);
+	return (reinterpret_cast<Data*>(raw));
 }
 
 int	main(void) {
@@ -31,9 +31,6 @@ int	main(void) {
 	std::cout << "Serialized Data raw: " << raw << std::endl;
 	dData = deserialize(raw);
 	std::cout << "Deserialized data int: " << dData->getNb() << " string: " << dData->getString() << std::endl;
-	if (dData == &testData)
-		std::cout << "The dData and testData pointers are the same!" << std::endl;
-	else
-		std::cout << "The dData pointer is not the same as testData pointer, this is an error!" << std::endl;
+	std::cout << "testData: " << &testData << " dData: " << dData << std::endl;
 	return (0);
 }
