@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 11:00:35 by mmarcott          #+#    #+#             */
-/*   Updated: 2024/02/27 15:46:00 by mmarcott         ###   ########.fr       */
+/*   Updated: 2024/03/14 17:30:28 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,25 +33,26 @@ static void	printThings(T conv){
 		std::cout << "double: " << "impossible" << std::endl;
 		return ;
 	}
-	char	character = (char)conv;
-	int		integer = (int)conv;
-	float	floatingP = (float)conv;
-	double	doubleN = (double)conv;
+	char	character = static_cast<char>(conv);
+	int		integer = static_cast<int>(conv);
+	float	floatingP = static_cast<float>(conv);
+	double	doubleN = static_cast<double>(conv);
 
-	if (isprint(character) && (double)conv <= std::numeric_limits<char>::max() && (double)conv >= std::numeric_limits<char>::min())
+	if (isprint(character) && static_cast<double>(conv) <= std::numeric_limits<char>::max() && static_cast<double>(conv) >= std::numeric_limits<char>::min())
 		std::cout << "char: " << character << std::endl;
 	else
 		std::cout << "char: Non displayable" << std::endl;
-	if ((double)conv > std::numeric_limits<int>::max() || (double)conv < std::numeric_limits<int>::min())
+	if (static_cast<double>(conv) > std::numeric_limits<int>::max() || static_cast<double>(conv) < std::numeric_limits<int>::min())
 		std::cout << "int: impossible" << std::endl;
 	else
 		std::cout << "int: " << integer << std::endl;
 	std::cout.setf(std::ios::fixed, std::ios::floatfield);
 	std::cout.precision(1);
-	if (((double)conv <= std::numeric_limits<float>::max() && (double)conv >= std::numeric_limits<float>::min()) || (double)conv == 0)
+	if ((static_cast<double>(conv) <= std::numeric_limits<float>::max() && static_cast<double>(conv) >= std::numeric_limits<float>::min()) || static_cast<double>(conv) == 0)
 		std::cout << "float: " << floatingP << "f" << std::endl;
 	else
 		std::cout << "float: impossible" << std::endl;
+	std::cout.precision(2);
 	std::cout << "double: " << doubleN << std::endl;
 }
 
